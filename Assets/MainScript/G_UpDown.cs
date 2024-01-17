@@ -9,15 +9,14 @@ public class GroundUpDown : MonoBehaviour
 
     bool isUp = true;
 
-    int maxY = 10;
+    int maxY = 12;
     
     int moveSpeed = 5;
     private void Start()
     {
-        int ranY = Random.Range(7, 14);
         //Debug.Log(ranY);
         GroundPlace = transform.position;
-        dir = new Vector3(GroundPlace.x, GroundPlace.y + ranY, GroundPlace.z);
+        dir = new Vector3(GroundPlace.x, GroundPlace.y + maxY, GroundPlace.z);
     }
     void Update()
     {

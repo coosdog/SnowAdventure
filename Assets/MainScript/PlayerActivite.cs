@@ -9,6 +9,7 @@ public class PlayerActivite : MonoBehaviour
     Collider colldier;
     Animator animator;
     Rigidbody rb;
+    public Camera cam;
 
     int Speed = 10;
     float jumpPower = 5;
@@ -51,7 +52,8 @@ public class PlayerActivite : MonoBehaviour
             RayPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
             
             animator.SetBool("IsRun", true);
-            dir = Vector3.forward * vertical + Vector3.right * horizontal;
+            dir = cam.transform.localRotation* Vector3.forward * vertical 
+                + cam.transform.localRotation*Vector3.right * horizontal;
             dir.y = 0;
             dir = dir.normalized;
             transform.rotation = Quaternion.LookRotation(dir);

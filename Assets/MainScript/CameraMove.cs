@@ -5,24 +5,15 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    int maxDistance = 10;
-    int moveSpeed = 10;
-
-    public Player player;
-    float absV;
+    public CinemachineFreeLook cam;
 
     private void Start()
     {
+        cam = GetComponent<CinemachineFreeLook>();
     }
     void Update()
     {
-        absV = Mathf.Abs(transform.position.z - player.transform.position.z);
-        //cam.m_YAxis.m_InputAxisValue
-        transform.position 
-            = new Vector3(player.transform.position.x,player.transform.position.y+maxDistance,transform.position.z);
-        if (absV < 10)
-            transform.position -= Vector3.forward *Time.deltaTime * moveSpeed;
-        if (absV > 15)
-            transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
+        //cam.m_YAxis.m_InputAxisValue = -Input.GetAxis("Mouse Y");
+        cam.m_XAxis.m_InputAxisValue = -Input.GetAxis("Mouse X");
     }
 }
