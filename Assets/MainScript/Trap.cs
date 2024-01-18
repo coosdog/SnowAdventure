@@ -21,7 +21,7 @@ public class UpTrap : TrapMode
     int Power;
     int UpPower = UnityEngine.Random.Range(15, 20);
 
-    bool isUpTypeCheck(Up_Trap_Type Uptype)
+    bool IsUpTypeCheck(Up_Trap_Type Uptype)
     {
         return (Uptype & owner.up_type) != 0;
     }
@@ -41,11 +41,11 @@ public class UpTrap : TrapMode
             }
             return randomValue;
         }
-        if (isUpTypeCheck(Up_Trap_Type.Left))
+        if (IsUpTypeCheck(Up_Trap_Type.Left))
             Power = UnityEngine.Random.Range(-15, -20);
-        if (isUpTypeCheck(Up_Trap_Type.Right))
+        if (IsUpTypeCheck(Up_Trap_Type.Right))
             Power = UnityEngine.Random.Range(15, 20);
-        if (isUpTypeCheck(Up_Trap_Type.Random))
+        if (IsUpTypeCheck(Up_Trap_Type.Random))
             Power = RandomNumber(-20, 20);
     }
 

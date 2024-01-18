@@ -8,49 +8,65 @@ public enum ChooseLR
     Right = 1 << 1
 }
 
-public class GroundLRMove : MonoBehaviour
+public class G_LRMove : MonoBehaviour
 {
     Vector3 origin;
     Vector3 targetPlace;
     Vector3 dir;
     public ChooseLR chooseLR;
 
+    GameObject something;
+
     bool isMove = false;
     bool isTurnPoint = false;
-    bool isLRcheck(ChooseLR choose)
+    bool IsLRcheck(ChooseLR choose)
     {
         return (chooseLR & choose) != 0;
     }
     private void Start()
     {
         origin = transform.position;
-        if(isLRcheck(ChooseLR.Left) )
+        if (IsLRcheck(ChooseLR.Right))
         {
-            targetPlace = new Vector3(transform.position.x -10,transform.position.y,transform.position.z);
+            targetPlace = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
             dir = targetPlace - origin;
+            dir = dir.normalized;
             isMove = true;
         }
-        if (isLRcheck(ChooseLR.Right))
+        if (IsLRcheck(ChooseLR.Left))
         {
             targetPlace = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
             dir = targetPlace - origin;
-            isMove =true;
+            dir = dir.normalized;
+            isMove = true;
         }
     }
 
     void Update()
     {
-        if(isMove && !isTurnPoint) 
+        if (isMove && !isTurnPoint)
         {
             transform.position += dir * Time.deltaTime;
-            if(transform.position.x > targetPlace.x-1 && transform.position.x < targetPlace.x +1 )
+            if (something != null)
+                something.transform.position += dir * Time.deltaTime;
+            if (transform.position.x > targetPlace.x - 1 && transform.position.x < targetPlace.x + 1)
                 isTurnPoint = true;
         }
         else
         {
             transform.position -= dir * Time.deltaTime;
-            if(transform.position.x > origin.x -1 && transform .position.x < origin.x +1)
-               isTurnPoint = false;
+            if (something != null)
+                something.transform.position -= dir * Time.deltaTime;
+            if (transform.position.x > origin.x - 1 && transform.position.x < origin.x + 1)
+                isTurnPoint = false;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        something = collision.gameObject;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        something = null;
     }
 }

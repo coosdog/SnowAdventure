@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundUpDown : MonoBehaviour
+public class G_UpDown : MonoBehaviour
 {
     Vector3 GroundPlace;
     Vector3 dir;

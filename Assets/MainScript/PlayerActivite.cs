@@ -12,7 +12,7 @@ public class PlayerActivite : MonoBehaviour
     public Camera cam;
 
     int Speed = 10;
-    float jumpPower = 5;
+    float jumpPower = 60;
     float maxRay = 1;
 
     float horizontal;

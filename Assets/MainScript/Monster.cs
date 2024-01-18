@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
 public interface IStateMachine
@@ -22,30 +24,97 @@ public class State
 public class MonsterState : State
 {
     protected Monster monster;
+    protected Vector3 thisPos;
     protected Vector3 targetPos;
+    protected Vector3 dir;
+    protected Collider[] cols;
+    protected int moveSpeed = 3;
+    float serchRange = 4f;
+
+    
+
     public override void Init(IStateMachine sm)
     {
         base.Init(sm);
         monster = (Monster)sm.GetOwner();
+        thisPos = monster.transform.position;
     }
     public override void OnUpdate()
     {
+        cols = Physics.OverlapSphere(monster.transform.position, serchRange, 1 << 7);
+        if (cols.Length > 0)
+        {
+            targetPos = cols[0].transform.position;
+            if(monster.temp==true)
+            {
+                monster.animator.SetTrigger("SerchSomething");
+            sm.SetState("Tracking");
+            }
+        }
         //오버랩스피어 터트려서 서치
     }
 }
 public class MonsterPatrolState : MonsterState
 {
-    public override void OnEnter() 
+
+    public override void OnEnter()
     {
+        targetPos = monster.targetPlace.transform.position;
     }
     public override void OnExit() { }
-    public override void OnUpdate() 
+    public override void OnUpdate()
     {
         base.OnUpdate();
+        dir = targetPos - monster.transform.position;
+        dir = dir.normalized;
+        monster.transform.position += dir * Time.deltaTime * moveSpeed;
+        if (Vector3.Distance(targetPos, monster.transform.position) <= 0.5f)
+        {
+            sm.SetState("ReturnH");
+        }
     }
 }
-public class MonsterReturnHState : MonsterState { }
-public class MonsterTrackingState : MonsterState { }
+public class MonsterReturnHState : MonsterState
+{
+    public override void OnEnter()
+    {
+
+    }
+    public override void OnExit() 
+    {
+        targetPos = monster.targetPlace.transform.position;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        dir = thisPos - monster.transform.position;
+        dir = dir.normalized;
+        monster.transform.position += dir * Time.deltaTime * moveSpeed;
+        if (Vector3.Distance(thisPos, monster.transform.position) <= 0.5f)
+            sm.SetState("Patrol");
+    }
+}
+public class MonsterTrackingState : MonsterState
+{
+    public override void OnEnter()
+    {
+    }
+    public new void OnExit() 
+    {
+        monster.temp = true;
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        dir = targetPos - monster.transform.position;
+        dir = dir.normalized;
+        monster.transform.position += dir*Time.deltaTime * moveSpeed;
+        if (cols.Length < 1)
+        {
+            sm.SetState("ReturnH");
+        }
+    }
+}
 
 public class StateMachine<T> : IStateMachine where T : class // 확장 가능성을 열어두기 위하여 T를 사용
 {
@@ -53,8 +122,8 @@ public class StateMachine<T> : IStateMachine where T : class // 확장 가능성을 열
     public State curState = null;
 
     Dictionary<string, State> stateDic = null;
- 
-    public StateMachine() 
+
+    public StateMachine()
     {
         stateDic = new Dictionary<string, State>();
     }
@@ -73,9 +142,9 @@ public class StateMachine<T> : IStateMachine where T : class // 확장 가능성을 열
 
     public void SetState(string name)
     {
-        if(stateDic.ContainsKey(name))
+        if (stateDic.ContainsKey(name))
         {
-            if(curState != null)
+            if (curState != null)
                 curState.OnExit();
             curState = stateDic[name];
             curState.OnEnter();
@@ -92,11 +161,19 @@ public class Monster : MonoBehaviour
 {
     public GameObject targetPlace;
 
+    public bool temp = true;
+    public void Change()
+    {
+        temp = false;
+    }
+
     private StateMachine<Monster> sm;
     public Animator animator;
-    public Collider targetCollider; 
+    public Collider targetCollider;
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         sm = new StateMachine<Monster>();
         sm.owner = this;
         sm.AddState("Patrol", new MonsterPatrolState());
@@ -109,5 +186,16 @@ public class Monster : MonoBehaviour
     void Update()
     {
         sm.Update();
+    }
+
+    void SerchSomething()
+    {
+        sm.SetState("Tracking");
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 4f);
     }
 }
