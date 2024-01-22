@@ -30,8 +30,8 @@ public class CreatePlayer : MonoBehaviour
 
     public void InputSound(AudioClip clip)
     {
-        AM.mainaudio.clip = clip;
-        AM.mainaudio.Play();
+        //AM.mainaudio.clip = clip;
+        //AM.mainaudio.Play();
     }
 
     void Start()

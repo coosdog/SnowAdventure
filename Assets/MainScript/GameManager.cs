@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;    
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     public int CoinNum = 0;
@@ -30,6 +30,13 @@ public class GameManager : MonoBehaviour
     public Camera boss;
     
     bool[] isSpecial = new bool[2];
+    int stageNum = 0; 
+
+    public int StageNum
+    {
+       get { return stageNum; }
+        set { stageNum = value; }
+    }
 
     public void BossMode()
     {
@@ -91,7 +98,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        player.transform.position = StartPoint.transform.position;
+        //player.transform.position = StartPoint.transform.position;
 
         //textPanel.SetActive(false);
         //specialTeleport.SetActive(false);

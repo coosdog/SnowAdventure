@@ -3,45 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    public AudioSource mainaudio;
-    public AudioSource BGM;
-    
+    public GameObject audioComponentPrefab;
+    public Queue<GameObject> pool = new Queue<GameObject>();
+
     bool isMain = true;
     bool isBGM = true;
-    
 
-    
-    public void MainMute()
+    private void Awake()
     {
-        isMain = !isMain;
-        if(isMain) 
+        base.Awake();
+        Init();
+    }
+    void Init()
+    {
+        for (int i = 0; i < 10; i++)
         {
-            mainaudio.volume = 1f;
-        }
-        else if(!isMain)
-        {
-        mainaudio.volume = 0;
+            GameObject temp = Instantiate(audioComponentPrefab);
+            temp.SetActive(false);
+            pool.Enqueue(temp);
         }
     }
-    public void BGMMute()
+    
+    AudioComponent Pop()
     {
-        isBGM = !isBGM;
-        if (isBGM)
-        {
-            BGM.volume = 1f;
-        }
-        else if (!isBGM)
-        {
-            BGM.volume = 0;
-        }
+        pool.Peek().SetActive(true);
+        return pool.Dequeue().GetComponent<AudioComponent>();
+    }
+
+    public void Play(AudioClip clip, Transform target)
+    {
+        if(pool.Count < 5)
+            Init();
+        AudioComponent temp = Pop();
+        temp.transform.parent = target;
+        temp.transform.position = target.position; 
+        temp.Play(clip);
+    }
+
+    public void RetrunPool(GameObject returnObj)
+    {
+        returnObj.SetActive(false);
+        pool.Enqueue(returnObj);
     }
 
     void Start()
     {
-        mainaudio = GetComponent<AudioSource>();
-        
     }
 
 }

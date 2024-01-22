@@ -56,7 +56,7 @@ public class PlayerActivite : MonoBehaviour
                 + cam.transform.localRotation*Vector3.right * horizontal;
             dir.y = 0;
             dir = dir.normalized;
-            transform.rotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.LookRotation(dir*Speed);
             if (Physics.Raycast(RayPosition, dir * maxRay, out hit, maxRay)
                 && hit.collider.gameObject.tag == "Ground")
             {

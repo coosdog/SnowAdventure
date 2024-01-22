@@ -18,8 +18,9 @@ public class Player : MonoBehaviour
     public AudioManager AM;
 
     [Header("Audio")]
-    public AudioClip cancleAudio;
+    public AudioClip jumpAudio;
     public AudioClip moveAudio;
+    public AudioClip attackAudio;
 
     [Header("Player")]
     public playerState state;
@@ -35,8 +36,8 @@ public class Player : MonoBehaviour
 
     public void InputSound(AudioClip clip)
     {
-        AM.mainaudio.clip = clip;
-        AM.mainaudio.Play();
+        //AM.mainaudio.clip = clip;
+        //AM.mainaudio.Play();
     }
 
     void Start()
@@ -68,7 +69,15 @@ public class Player : MonoBehaviour
 
     void StepSound()
     {
-        AudioSource.PlayClipAtPoint(moveAudio, transform.position);
+        AudioManager.instance.Play(moveAudio, this.transform);
+    }
+    void jumpSound()
+    {
+        AudioManager.instance.Play(jumpAudio, this.transform);
+    }
+    void attackSound()
+    {
+        AudioManager.instance.Play(attackAudio, this.transform);
     }
 
     IEnumerator JumpCool()

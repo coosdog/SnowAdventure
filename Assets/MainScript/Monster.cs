@@ -45,11 +45,8 @@ public class MonsterState : State
         if (cols.Length > 0)
         {
             targetPos = cols[0].transform.position;
-            if(monster.temp==true)
-            {
-                monster.animator.SetTrigger("SerchSomething");
+            monster.transform.LookAt(targetPos);
             sm.SetState("Tracking");
-            }
         }
         //오버랩스피어 터트려서 서치
     }
@@ -67,6 +64,7 @@ public class MonsterPatrolState : MonsterState
         base.OnUpdate();
         dir = targetPos - monster.transform.position;
         dir = dir.normalized;
+        monster.transform.LookAt(targetPos);
         monster.transform.position += dir * Time.deltaTime * moveSpeed;
         if (Vector3.Distance(targetPos, monster.transform.position) <= 0.5f)
         {
@@ -89,6 +87,7 @@ public class MonsterReturnHState : MonsterState
         base.OnUpdate();
         dir = thisPos - monster.transform.position;
         dir = dir.normalized;
+        monster.transform.LookAt(thisPos);
         monster.transform.position += dir * Time.deltaTime * moveSpeed;
         if (Vector3.Distance(thisPos, monster.transform.position) <= 0.5f)
             sm.SetState("Patrol");
@@ -101,7 +100,6 @@ public class MonsterTrackingState : MonsterState
     }
     public new void OnExit() 
     {
-        monster.temp = true;
     }
     public override void OnUpdate()
     {
@@ -161,12 +159,6 @@ public class Monster : MonoBehaviour
 {
     public GameObject targetPlace;
 
-    public bool temp = true;
-    public void Change()
-    {
-        temp = false;
-    }
-
     private StateMachine<Monster> sm;
     public Animator animator;
     public Collider targetCollider;
@@ -186,11 +178,6 @@ public class Monster : MonoBehaviour
     void Update()
     {
         sm.Update();
-    }
-
-    void SerchSomething()
-    {
-        sm.SetState("Tracking");
     }
 
     private void OnDrawGizmos()

@@ -67,7 +67,7 @@ public class SceneChange : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene("MainScene");
+                    SceneManager.LoadScene("ChoiceScene");
                 }
             }
 
