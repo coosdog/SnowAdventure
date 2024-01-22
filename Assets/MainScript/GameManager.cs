@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     public Camera boss;
     
     bool[] isSpecial = new bool[2];
-    int stageNum = 0; 
+    int stageNum = 1; 
 
     public int StageNum
     {

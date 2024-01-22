@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
+using static Interface;
 
 public interface IStateMachine
 {
@@ -155,7 +156,7 @@ public class StateMachine<T> : IStateMachine where T : class // 확장 가능성을 열
 }
 
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IHitable
 {
     public GameObject targetPlace;
 
@@ -184,5 +185,10 @@ public class Monster : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 4f);
+    }
+
+    public void Hit()
+    {
+        gameObject.SetActive(false);
     }
 }

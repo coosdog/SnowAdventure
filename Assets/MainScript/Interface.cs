@@ -6,6 +6,10 @@ public class Interface : MonoBehaviour
 {
     public interface IHitable
     {
-
+        public void Hit();
+    }
+    public interface IAttackable
+    {
+        public void Attack();
     }
 }

@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class ChoicePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.RightArrow) && transform.position.z < 75)
         {
             transform.position += new Vector3(0, 0, 5);
         }

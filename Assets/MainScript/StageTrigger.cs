@@ -8,13 +8,19 @@ public class StageTrigger : MonoBehaviour
     public int UniqueNum;
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("들어옴");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (other.GetComponent<ChoicePlayer>() != null)
         {
-            SceneManager.LoadScene("PublicStageStation");
+            Debug.Log("들어옴");
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (UniqueNum <= GameManager.instance.StageNum)
+                    SceneManager.LoadScene("Stage_"+UniqueNum);
+                else
+                    Debug.Log("아직 자격이 없습니다.");
+            }
         }
     }
-    
-        
-    
+
+
+
 }

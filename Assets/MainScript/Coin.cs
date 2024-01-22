@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    int coinLimit = 3;
-    Vector3 dir = Vector3.zero;
-    Collider[] cols = null;
-    //public GameManager gameManager;
     public AudioClip coinGet;
 
     void Update()
@@ -21,8 +17,8 @@ public class Coin : MonoBehaviour
     {
         if (other.GetComponent<Player>() != null)
         {
-            other.GetComponent<Player>().InputSound(coinGet);
-            //gameManager.CoinNum++;
+            AudioManager.instance.Play(coinGet, this.transform);
+            GameManager.instance.CoinNum++;
             Destroy(gameObject);
         }
     }

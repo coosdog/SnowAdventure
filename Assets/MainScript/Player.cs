@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static Interface;
 
 public enum playerState
 {
@@ -9,7 +10,7 @@ public enum playerState
     move,
     trap
 }
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHitable, IAttackable
 {
     public bool isPlay;
     [Header("Manager")]
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
     public PlayerActivite pMove;
 
     [Header("others")]
-    public GameObject startPoint;
+    public GameObject attackRange;
     //public Satan satan;
 
     float jumpCool = 3;
@@ -50,21 +51,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        /*
-        Debug.DrawRay(transform.position, Vector3.left * 100);
-        if (isPlay)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Collider[] col = Physics.OverlapSphere(transform.position, 2, 1 << 8);
-                if (col.Length > 0)
-                    col[0].GetComponent<EventText>().TextAct();
-                if (col.Length <= 0)
-                    gameManager.textPanel.SetActive(false);
-            }
-            
-        }
-        */
+
     }
 
     void StepSound()
@@ -102,5 +89,23 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z), 0.6f);
+    }
+
+    public void Hit()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Attack()
+    {
+        throw new System.NotImplementedException();
+    }
+    public void HitOn()
+    {
+        attackRange.SetActive(true);
+    }
+    public void HitOff()
+    {
+        attackRange.SetActive(false);
     }
 }

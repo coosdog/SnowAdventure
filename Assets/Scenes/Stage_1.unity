@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.48395744, g: 0.57573867, b: 0.68019843, a: 1}
+  m_IndirectSpecularColor: {r: 0.48396292, g: 0.5757421, b: 0.6802008, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2914,6 +2914,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728181223975587749, guid: 50d1bdeeb3ba5454286e5af49106db16, type: 3}
   m_PrefabInstance: {fileID: 1385929924}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &987397584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 528805239981026405, guid: 430a581904985844482f458aa6edb4e8, type: 3}
+  m_PrefabInstance: {fileID: 6922675664441782334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &987397589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987397584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5316c70d7c214df4fbcbac5e353a7f34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &987397590
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987397584}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1030993129
 GameObject:
   m_ObjectHideFlags: 3
@@ -3431,7 +3464,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127738284}
-  m_LocalRotation: {x: 0.22834423, y: 0.000000020797124, z: -0.0000000048777715, w: 0.9735805}
+  m_LocalRotation: {x: 0.22834425, y: -0.00000001490145, z: 0.0000000034949972, w: 0.9735805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4496,6 +4529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b406c3e75922ce14f9fc75b763c8adea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoalNum: 0
 --- !u!65 &1726271387
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5636,5 +5670,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 257394288}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 729453340129443422, guid: 430a581904985844482f458aa6edb4e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 430a581904985844482f458aa6edb4e8, type: 3}
