@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StageTrigger : MonoBehaviour
 {
+    public int UniqueNum;
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("µé¾î¿È");
