@@ -7,8 +7,8 @@ using static Interface;
 
 public interface IStateMachine
 {
-    void SetState(string name); // 상태바꾸는 함수
-    object GetOwner(); // 제네릭이기 때문에 
+    void SetState(string name);                   // 상태바꾸는 함수
+    object GetOwner();                            // 제네릭이기 때문에 
 }
 public class State
 {
@@ -31,9 +31,6 @@ public class MonsterState : State
     protected Collider[] cols;
     protected int moveSpeed = 3;
     float serchRange = 4f;
-
-    
-
     public override void Init(IStateMachine sm)
     {
         base.Init(sm);
