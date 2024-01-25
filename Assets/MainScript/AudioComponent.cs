@@ -17,8 +17,6 @@ public class AudioComponent : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(audioSource.isPlaying == false)

@@ -153,7 +153,7 @@ public class StateMachine<T> : IStateMachine where T : class // 확장 가능성을 열
 }
 
 
-public class Monster : MonoBehaviour, IHitable
+public class Monster : MonoBehaviour, IHitable, IAttackable
 {
     public GameObject targetPlace;
 
@@ -187,5 +187,15 @@ public class Monster : MonoBehaviour, IHitable
     public void Hit()
     {
         gameObject.SetActive(false);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<Player>() != null)
+            collision.gameObject.GetComponent<Player>().Hit();
+    }
+
+    public void Attack()
+    {
+        throw new System.NotImplementedException();
     }
 }

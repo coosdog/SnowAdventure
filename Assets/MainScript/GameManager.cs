@@ -98,7 +98,7 @@ public class GameManager : Singleton<GameManager>
     }
     private void Start()
     {
-        //player.transform.position = StartPoint.transform.position;
+        player.transform.position = StartPoint.transform.position;
 
         //textPanel.SetActive(false);
         //specialTeleport.SetActive(false);

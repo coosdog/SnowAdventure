@@ -21,7 +21,7 @@ public class Explosion : MonoBehaviour
         {
             if (cols[0].GetComponent<Player>() != null) 
             {
-            cols[0].GetComponent<Player>().InputSound(explosionAC);
+            //cols[0].GetComponent<Player>().InputSound(explosionAC);
             }
             else if (cols[0].GetComponent<CreatePlayer>() != null) 
             {

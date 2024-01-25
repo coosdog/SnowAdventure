@@ -8,9 +8,6 @@ public class AudioManager : Singleton<AudioManager>
     public GameObject audioComponentPrefab;
     public Queue<GameObject> pool = new Queue<GameObject>();
 
-    bool isMain = true;
-    bool isBGM = true;
-
     private void Awake()
     {
         base.Awake();
@@ -46,10 +43,6 @@ public class AudioManager : Singleton<AudioManager>
     {
         returnObj.SetActive(false);
         pool.Enqueue(returnObj);
-    }
-
-    void Start()
-    {
     }
 
 }

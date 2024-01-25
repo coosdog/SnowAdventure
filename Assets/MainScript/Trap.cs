@@ -231,7 +231,7 @@ public class Trap : MonoBehaviour
         {
             if (sound != null)
             {
-                other.GetComponent<Player>().InputSound(sound);
+                //other.GetComponent<Player>().InputSound(sound);
             }
             target = other.GetComponent<Player>();
             Active();
