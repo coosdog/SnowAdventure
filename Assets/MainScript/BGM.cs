@@ -10,5 +10,5 @@ public class BGM : MonoBehaviour
         Debug.Log("ºê±Ý ¿Â");
         AudioManager.instance.Play(bgm, this.transform);
     }
-
+     
 }

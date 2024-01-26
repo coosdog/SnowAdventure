@@ -5,6 +5,8 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public GameObject[] CheckStageObj;
+    int CheckNum = 0;
+   /*
     private static bool[] isCheckStage = new bool[15];
     public static bool[] IsCheckStage
     {
@@ -14,21 +16,18 @@ public class StageManager : MonoBehaviour
             isCheckStage = value;
         }
     }
+   */
     private void Start()
     {
-        /*
-        for (int i = 0; i < isCheckStage.Length; i++)
+        GameManager.instance.StageNum = 1;
+        for(int i = 0; i < GameManager.instance.IsCheckStage.Length; i++)
         {
-            isCheckStage[i] = false;
-        }
-        */
-        //IsCheckStage[0] = true;
-    }
-    private void Update()
-    {
-        if (isCheckStage[0]) 
-        {
-            CheckStageObj[0].SetActive(true);
+            if (GameManager.instance.IsCheckStage[i] == true)
+            {
+                CheckNum++;
+                CheckStageObj[i].SetActive(true);
+                GameManager.instance.StageNum++;
+            }
         }
     }
 }

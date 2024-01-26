@@ -10,7 +10,6 @@ public class StageTrigger : MonoBehaviour
     {
         if (other.GetComponent<ChoicePlayer>() != null)
         {
-            Debug.Log("µé¾î¿È");
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (UniqueNum <= GameManager.instance.StageNum)

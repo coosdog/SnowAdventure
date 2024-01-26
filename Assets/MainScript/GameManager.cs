@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     public GameObject specialTeleport;
     public GameObject PrincessUp;
     public GameObject BossPosition;
-    public GameObject StartPoint;
     public Player player;
     public Satan satan;
     [Header("UI")]
@@ -28,7 +27,17 @@ public class GameManager : Singleton<GameManager>
     [Header("Camera")]
     public Camera main;
     public Camera boss;
-    
+    private bool[] isCheckStage = new bool[15];
+
+    public bool[] IsCheckStage
+    {
+        get { return isCheckStage; }
+        set
+        {
+            isCheckStage = value;
+        }
+    }
+
     bool[] isSpecial = new bool[2];
     int stageNum = 1; 
 
@@ -80,7 +89,6 @@ public class GameManager : Singleton<GameManager>
             {
                 UIM.EndingCut();
             }
-            //talkIndex = 0;
             textPanel.SetActive(false);
             isSpecial[0] = true;
             SGround();
@@ -98,13 +106,7 @@ public class GameManager : Singleton<GameManager>
     }
     private void Start()
     {
-        player.transform.position = StartPoint.transform.position;
 
-        //textPanel.SetActive(false);
-        //specialTeleport.SetActive(false);
-        //PrincessUp.SetActive(false);
-        //isSpecial[0] = false;
-        //isSpecial[1] = false;
     }
    
 }
